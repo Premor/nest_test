@@ -1,17 +1,22 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import { Cats } from './cats.model';
 import { Cat } from './interfaces/cat.interface';
 
 
 @Injectable()
 export class CatsService {
-    private readonly cats: Cat[] = [];
-
+    // private readonly cats: Cat[] = [];
+    constructor(
+        @InjectModel(Cats)
+        private catModel: typeof Cats,
+      ) {}
     create(cat: Cat) {
         console.log(cat)
-        this.cats.push(cat);
+        this.catModel.create(cat);
     }
 
-    findAll(): Cat[] {
-        return this.cats;
+    async findAll() {
+        return this.catModel.findAll();
     }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Param, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
 import { CatsService } from './cats.service'
 import { Cat } from './interfaces/cat.interface'
 import { CreateCatDto } from './dto/create-cats.dto'
@@ -24,7 +24,7 @@ export class CatsController {
           || catDto.bloodType === undefined
            )
         {
-            throw "error";
+            throw new BadRequestException()
         }
         this.catsService.create(catDto);
     }
