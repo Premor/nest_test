@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, HttpException, HttpStatus, BadRequestException, Delete } from '@nestjs/common';
 import { CatsService } from './cats.service'
 import { Cat } from './interfaces/cat.interface'
 import { CreateCatDto } from './dto/create-cats.dto'
@@ -13,20 +13,25 @@ export class CatsController {
     }
 
     @Get(':name')
-    returnOne(@Param('name') name: string): string {
-        return `Cat with name ${name}`;
+    returnOne(@Param('name') name: string): Promise<Cat> {
+        return this.catsService.findOne(name);
     }
 
     @Post()
     async createCat(@Body() catDto: CreateCatDto) {
-        if ( catDto.name === undefined 
-          || catDto.age === undefined
-          || catDto.bloodType === undefined
-           )
-        {
-            throw new BadRequestException()
-        }
+        // if ( catDto.name === undefined 
+        //   || catDto.age === undefined
+        //   || catDto.bloodType === undefined
+        //    )
+        // {
+        //     throw new BadRequestException()
+        // }
         this.catsService.create(catDto);
+    }
+
+    @Delete()
+    async deleteById(@Body('id') id:number){
+        this.catsService.delete(id);
     }
 }
 

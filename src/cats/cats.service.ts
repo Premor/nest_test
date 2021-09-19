@@ -19,4 +19,12 @@ export class CatsService {
     async findAll() {
         return this.catModel.findAll();
     }
+
+    async findOne(name:string){
+        return this.catModel.findOne({ where: {name} });
+    }
+
+    async delete(id:number){
+        await this.catModel.destroy({where:{id}});
+    }
 }

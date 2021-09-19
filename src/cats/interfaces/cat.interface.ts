@@ -4,4 +4,5 @@ export interface Cat {
     bloodType: BloodType
 }
 
-type BloodType = 'A' | 'B' | 'C' | 'D'
+// export type BloodType = 'A' | 'B' | 'C' | 'D'
+export enum BloodType { A = 'A', B = 'B', C = 'C', D = 'D' }

@@ -5,6 +5,7 @@ import { Test2Module } from './test2/test2.module';
 import { CatsModule } from './cats/cats.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Cats } from './cats/cats.model';
+import { GrpcModule } from './grpc/grpc.module';
 
 
 
@@ -21,6 +22,7 @@ import { Cats } from './cats/cats.model';
       autoLoadModels: true,
       synchronize: true,
     }),
+    GrpcModule,
   ],
   controllers: [AppController, Test1Controller,],
   providers: [AppService,],
